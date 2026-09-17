@@ -58,6 +58,13 @@ export default function Home() {
   const [showUncertain, setShowUncertain] = useState(false);
   const [correction, setCorrection] = useState("");
   const [mobileNav, setMobileNav] = useState(false);
+  const [activeNav, setActiveNav] = useState("Regional pilots");
+
+  const navigateWorkspace = (label: string, targetId: string) => {
+    setActiveNav(label);
+    setMobileNav(false);
+    window.setTimeout(() => document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "center" }), 0);
+  };
 
   const stageCopy = useMemo(() => {
     if (stage === "approved") return { eyebrow: "Pilot ready", title: "Intervention approved", accent: "The programme planner has created a testable next step for a regional pilot." };
@@ -81,10 +88,10 @@ export default function Home() {
         </div>
         <div className="sidebar-section-label">Workspace</div>
         <nav className="side-nav">
-          <button className="nav-item nav-item-active"><Layers3 size={17} /> Regional pilots <span className="nav-count">04</span></button>
-          <button className="nav-item"><Target size={17} /> Partner signals</button>
-          <button className="nav-item"><BookOpen size={17} /> Provider library</button>
-          <button className="nav-item"><ClipboardCheck size={17} /> Evidence & decisions</button>
+          <button className={`nav-item ${activeNav === "Regional pilots" ? "nav-item-active" : ""}`} onClick={() => navigateWorkspace("Regional pilots", "regional-pilot-workspace")}><Layers3 size={17} /> Regional pilots <span className="nav-count">04</span></button>
+          <button className={`nav-item ${activeNav === "Partner signals" ? "nav-item-active" : ""}`} onClick={() => navigateWorkspace("Partner signals", "partner-signal-card")}><Target size={17} /> Partner signals</button>
+          <button className={`nav-item ${activeNav === "Provider library" ? "nav-item-active" : ""}`} onClick={() => navigateWorkspace("Provider library", "provider-library-card")}><BookOpen size={17} /> Provider library</button>
+          <button className={`nav-item ${activeNav === "Evidence & decisions" ? "nav-item-active" : ""}`} onClick={() => navigateWorkspace("Evidence & decisions", "decision-workspace-card")}><ClipboardCheck size={17} /> Evidence & decisions</button>
         </nav>
         <div className="sidebar-bottom">
           <div className="pilot-card">
@@ -99,7 +106,7 @@ export default function Home() {
       <main className="main-area">
         <header className="topbar">
           <button className="mobile-menu" onClick={() => setMobileNav(!mobileNav)} aria-label="Open navigation"><Menu size={21} /></button>
-          <div className="crumbs"><span>Regional pilots</span><ArrowRight size={14} /><strong>Task intervention</strong></div>
+          <div className="crumbs"><span>{activeNav}</span><ArrowRight size={14} /><strong>Task intervention</strong></div>
           <div className="topbar-actions"><span className="environment"><span className="status-dot" /> Local simulation</span><button className="icon-button" aria-label="Notifications"><Bell size={18} /><i /></button><button className="help-button"><CircleHelp size={17} /> Help</button></div>
         </header>
 
@@ -123,11 +130,11 @@ export default function Home() {
             <Step number="04" label="Pilot state" active={stage === "approved"} />
           </section>
 
-          <div className="workspace-grid">
+          <div className="workspace-grid" id="regional-pilot-workspace">
             <section className="task-column">
               <div className="section-kicker"><span className="kicker-icon"><Target size={15} /></span> Partner signal</div>
-              <article className="task-card">
-                <div className="task-card-head"><div><Pill tone="lime">TASK · NEW</Pill><span className="task-id">C06</span></div><button className="more-button" aria-label="More options">•••</button></div>
+              <article className="task-card" id="partner-signal-card" tabIndex={-1}>
+                <div className="task-card-head"><div><Pill tone="lime">TASK · NEW</Pill><span className="task-id">TP-014</span></div><button className="more-button" aria-label="More options">•••</button></div>
                 <div className="company-line"><span className="company-avatar">AU</span><span><strong>{task.employer}</strong><small>{task.location}</small></span></div>
                 <h2>{task.title}</h2>
                 <p>{task.description}</p>
@@ -136,7 +143,7 @@ export default function Home() {
               </article>
 
               <div className="section-kicker evidence-kicker"><span className="kicker-icon"><FileSearch size={15} /></span> Inspectable evidence <Pill>synthetic records</Pill></div>
-              <article className="evidence-card">
+              <article className="evidence-card" id="provider-library-card" tabIndex={-1}>
                 {evidence.map((item) => <div className="evidence-row" key={item.label}><div className={`evidence-status evidence-${item.kind}`}>{item.kind === "verified" ? <Check size={13} /> : <span>i</span>}</div><div><span>{item.label}</span><strong>{item.value}</strong></div><ArrowRight size={15} /></div>)}
                 <div className="evidence-footnote"><AlertCircle size={14} /> Official Skills Bank is context only — no live API connection.</div>
               </article>
@@ -144,7 +151,7 @@ export default function Home() {
 
             <section className="decision-column">
               <div className="section-kicker"><span className="kicker-icon kicker-orange"><Sparkles size={15} /></span> Proposed intervention {stage !== "brief" && <Pill tone={stage === "approved" ? "lime" : "amber"}>{stage === "approved" ? "approved" : "ready for review"}</Pill>}</div>
-              <article className={`proposal-card ${stage === "brief" ? "proposal-empty" : ""} ${stage === "approved" ? "proposal-approved" : ""}`}>
+              <article className={`proposal-card ${stage === "brief" ? "proposal-empty" : ""} ${stage === "approved" ? "proposal-approved" : ""}`} id="decision-workspace-card" tabIndex={-1}>
                 {stage === "brief" ? <>
                   <div className="empty-orbit"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="orbit-core"><Sparkles size={20} /></div></div>
                   <h2>Build the smallest useful test</h2>
@@ -171,7 +178,7 @@ export default function Home() {
             </section>
           </div>
 
-          <footer className="page-footer"><div><span className="footer-dot" /> Exercise prototype</div><span>AUDA-NEPAD assignment context · Records are synthetic · Partner event is simulated · No endorsement implied</span><a href="#next-case">Next validation case <ArrowRight size={14} /></a></footer>
+          <footer className="page-footer"><div><span className="footer-dot" /> Exercise prototype</div><span>AUDA-NEPAD assignment context · Records are synthetic · Partner event is simulated · No endorsement implied</span>C06 validation case </footer>
         </div>
       </main>
     </div>

@@ -1,5 +1,9 @@
 # Wolf Handoff — AUDA-NEPAD Exercise Prototype
 
+## C06: Training that leads to the work employers actually need
+
+yassine boujrada
+
 ## Assignment context
 
 The assigned exercise client is **AUDA-NEPAD**. This is a fictional hackathon exercise and does not imply that AUDA-NEPAD commissioned or endorsed the prototype. The target users are skills programme planners working with employers, training providers, Member State teams, regional economic communities, and other partners.
