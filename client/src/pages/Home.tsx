@@ -25,19 +25,19 @@ import {
 type Stage = "brief" | "proposal" | "review" | "approved";
 
 const task = {
-  title: "Reconcile a weekly stock variance",
-  employer: "Northstar Logistics",
-  location: "Leeds · warehouse operations",
+  title: "Reconcile a cross-border food supply variance",
+  employer: "Regional food systems partner",
+  location: "Member State pilot · food and nutrition",
   description:
-    "Compare the WMS export with the physical count, identify the cause of a variance, and record the corrective action before the next dispatch window.",
-  signal: "3 recurring discrepancies reported this month",
+    "Compare the programme dashboard with partner reports, identify the cause of a delivery variance, and record the corrective action before the next coordination review.",
+  signal: "3 recurring delivery gaps reported this quarter",
 };
 
 const evidence = [
-  { label: "Employer task brief", value: "Northstar interview · 17 Sep", kind: "verified" },
-  { label: "Related capability", value: "Inventory control & reconciliation", kind: "verified" },
-  { label: "Provider module", value: "Warehouse data fundamentals", kind: "context" },
-  { label: "Evidence quality", value: "Good enough for a pilot", kind: "verified" },
+  { label: "Partner task brief", value: "Regional coordination note · 17 Sep", kind: "verified" },
+  { label: "Related capability", value: "Programme delivery & data use", kind: "verified" },
+  { label: "Provider module", value: "Evidence-led programme management", kind: "context" },
+  { label: "Evidence quality", value: "Good enough for a Member State pilot", kind: "verified" },
 ];
 
 function Pill({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "lime" | "amber" | "red" }) {
@@ -60,10 +60,10 @@ export default function Home() {
   const [mobileNav, setMobileNav] = useState(false);
 
   const stageCopy = useMemo(() => {
-    if (stage === "approved") return { eyebrow: "Pilot ready", title: "Intervention approved", accent: "The planner has created a testable next step." };
-    if (stage === "review") return { eyebrow: "Human review", title: "One decision remains", accent: "Check the evidence, then approve or correct the proposal." };
-    if (stage === "proposal") return { eyebrow: "New signal received", title: "A next step is ready", accent: "This proposal is triggered by a simulated employer update." };
-    return { eyebrow: "Start with the work", title: "Turn a task into a learning test", accent: "A focused pilot for the decision a programme planner actually owns." };
+    if (stage === "approved") return { eyebrow: "Pilot ready", title: "Intervention approved", accent: "The programme planner has created a testable next step for a regional pilot." };
+    if (stage === "review") return { eyebrow: "Human review", title: "One decision remains", accent: "Check the evidence, then approve or correct the technical-assistance proposal." };
+    if (stage === "proposal") return { eyebrow: "New partner signal received", title: "A next step is ready", accent: "This proposal is triggered by a simulated regional partner update." };
+    return { eyebrow: "Start with the work", title: "Turn a partner task into a learning test", accent: "A focused pilot for the programme planner coordinating employers, providers and Member State teams." };
   }, [stage]);
 
   const reset = () => {
@@ -77,19 +77,19 @@ export default function Home() {
       <aside className={`sidebar ${mobileNav ? "sidebar-open" : ""}`}>
         <div className="brand-lockup">
           <div className="brand-mark"><span /></div>
-          <div><strong>taskpilot</strong><small>skills programme planner</small></div>
+          <div><strong>AUDA-NEPAD</strong><small>skills programme planner · exercise</small></div>
         </div>
         <div className="sidebar-section-label">Workspace</div>
         <nav className="side-nav">
-          <button className="nav-item nav-item-active"><Layers3 size={17} /> Pilot queue <span className="nav-count">04</span></button>
-          <button className="nav-item"><Target size={17} /> Employer signals</button>
+          <button className="nav-item nav-item-active"><Layers3 size={17} /> Regional pilots <span className="nav-count">04</span></button>
+          <button className="nav-item"><Target size={17} /> Partner signals</button>
           <button className="nav-item"><BookOpen size={17} /> Provider library</button>
-          <button className="nav-item"><ClipboardCheck size={17} /> Evidence log</button>
+          <button className="nav-item"><ClipboardCheck size={17} /> Evidence & decisions</button>
         </nav>
         <div className="sidebar-bottom">
           <div className="pilot-card">
             <div className="pilot-card-icon"><FlaskConical size={16} /></div>
-            <div><strong>Day 1 pilot</strong><span>1 task · 1 provider</span></div>
+            <div><strong>Agenda 2063 pilot</strong><span>1 partner · 1 provider</span></div>
             <ArrowRight size={15} />
           </div>
           <button className="profile-button"><span className="avatar">MP</span><span className="profile-copy"><strong>Maya Patel</strong><small>Programme planner</small></span><ChevronDown size={15} /></button>
@@ -99,7 +99,7 @@ export default function Home() {
       <main className="main-area">
         <header className="topbar">
           <button className="mobile-menu" onClick={() => setMobileNav(!mobileNav)} aria-label="Open navigation"><Menu size={21} /></button>
-          <div className="crumbs"><span>Pilot queue</span><ArrowRight size={14} /><strong>Task intervention</strong></div>
+          <div className="crumbs"><span>Regional pilots</span><ArrowRight size={14} /><strong>Task intervention</strong></div>
           <div className="topbar-actions"><span className="environment"><span className="status-dot" /> Local simulation</span><button className="icon-button" aria-label="Notifications"><Bell size={18} /><i /></button><button className="help-button"><CircleHelp size={17} /> Help</button></div>
         </header>
 
@@ -114,7 +114,7 @@ export default function Home() {
           </section>
 
           <section className="progress-strip" aria-label="Workflow progress">
-            <Step number="01" label="Employer task" active={stage === "brief"} done={stage !== "brief"} />
+            <Step number="01" label="Partner task" active={stage === "brief"} done={stage !== "brief"} />
             <div className="progress-line" />
             <Step number="02" label="Evidence-backed proposal" active={stage === "proposal"} done={stage === "review" || stage === "approved"} />
             <div className="progress-line" />
@@ -125,10 +125,10 @@ export default function Home() {
 
           <div className="workspace-grid">
             <section className="task-column">
-              <div className="section-kicker"><span className="kicker-icon"><Target size={15} /></span> Employer signal</div>
+              <div className="section-kicker"><span className="kicker-icon"><Target size={15} /></span> Partner signal</div>
               <article className="task-card">
-                <div className="task-card-head"><div><Pill tone="lime">TASK · NEW</Pill><span className="task-id">TP-014</span></div><button className="more-button" aria-label="More options">•••</button></div>
-                <div className="company-line"><span className="company-avatar">NL</span><span><strong>{task.employer}</strong><small>{task.location}</small></span></div>
+                <div className="task-card-head"><div><Pill tone="lime">TASK · NEW</Pill><span className="task-id">C06</span></div><button className="more-button" aria-label="More options">•••</button></div>
+                <div className="company-line"><span className="company-avatar">AU</span><span><strong>{task.employer}</strong><small>{task.location}</small></span></div>
                 <h2>{task.title}</h2>
                 <p>{task.description}</p>
                 <div className="signal-note"><Zap size={14} /><span>{task.signal}</span></div>
@@ -148,15 +148,15 @@ export default function Home() {
                 {stage === "brief" ? <>
                   <div className="empty-orbit"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="orbit-core"><Sparkles size={20} /></div></div>
                   <h2>Build the smallest useful test</h2>
-                  <p>Use the task and evidence on the left to create a focused intervention a provider can run this week.</p>
+                  <p>Use the partner task and evidence on the left to create a focused intervention a provider can run for the regional pilot.</p>
                   <button className="primary-button" onClick={() => setStage("proposal")}>Generate intervention <ArrowRight size={16} /></button>
                   <div className="button-caption"><Zap size={13} /> Uses only the evidence shown above</div>
                 </> : <>
-                  <div className="proposal-topline"><div className="proposal-icon"><Sparkles size={17} /></div><div><span className="proposal-label">FOCUSED LEARNING INTERVENTION</span><h2>Stock variance sprint</h2></div><Pill tone="lime">0.82 confidence</Pill></div>
-                  <p className="proposal-summary">A two-session practical sprint that asks a learner to reconcile a real-looking stock variance, explain the cause, and log a corrective action.</p>
-                  <div className="outcome-box"><div className="outcome-icon"><BadgeCheck size={18} /></div><div><span>Observable outcome</span><strong>Complete a variance reconciliation with an evidence trail</strong></div></div>
-                  <div className="proposal-grid"><div><span>Format</span><strong>2 × 90 min practicals</strong></div><div><span>Provider module</span><strong>Warehouse data fundamentals</strong></div><div><span>Pass signal</span><strong>Cause + action recorded</strong></div><div><span>Owner</span><strong>Training provider</strong></div></div>
-                  {stage === "proposal" && <div className="event-banner"><div className="event-icon"><Bell size={16} /></div><div><strong>Simulated event received</strong><span>Northstar added “before next dispatch” as a constraint.</span></div><Pill tone="amber">SIMULATION</Pill></div>}
+                  <div className="proposal-topline"><div className="proposal-icon"><Sparkles size={17} /></div><div><span className="proposal-label">FOCUSED TECHNICAL ASSISTANCE INTERVENTION</span><h2>Regional delivery sprint</h2></div><Pill tone="lime">0.82 confidence</Pill></div>
+                  <p className="proposal-summary">A two-session practical sprint that asks a programme team to reconcile a delivery variance, explain the cause, and log a corrective action for the next coordination review.</p>
+                  <div className="outcome-box"><div className="outcome-icon"><BadgeCheck size={18} /></div><div><span>Observable outcome</span><strong>Complete a delivery reconciliation with an evidence trail</strong></div></div>
+                  <div className="proposal-grid"><div><span>Format</span><strong>2 × 90 min practicals</strong></div><div><span>Provider module</span><strong>Evidence-led programme management</strong></div><div><span>Pass signal</span><strong>Cause + action recorded</strong></div><div><span>Owner</span><strong>Member State delivery team</strong></div></div>
+                  {stage === "proposal" && <div className="event-banner"><div className="event-icon"><Bell size={16} /></div><div><strong>Simulated partner event received</strong><span>Regional partner added “before next coordination review” as a constraint.</span></div><Pill tone="amber">SIMULATION</Pill></div>}
                   {stage === "review" && <div className="review-box"><div className="review-head"><UserRound size={16} /><strong>Your decision</strong><span>human approval required</span></div><label htmlFor="correction">Correction or note <span>optional</span></label><textarea id="correction" value={correction} onChange={(event) => setCorrection(event.target.value)} placeholder="e.g. Add a 15-minute supervisor debrief..." rows={3} /><div className="review-actions"><button className="secondary-button" onClick={() => setStage("proposal")}><X size={15} /> Send back</button><button className="primary-button small" onClick={() => setStage("approved")}><Check size={15} /> Approve pilot</button></div></div>}
                   {stage === "approved" && <div className="approved-banner"><div className="approved-icon"><Check size={16} /></div><div><strong>Pilot state recorded</strong><span>Approved by Maya Patel · just now {correction && "· correction added"}</span></div><BadgeCheck size={18} /></div>}
                   {stage === "proposal" && <button className="primary-button full" onClick={() => setStage("review")}>Review proposal <ArrowRight size={16} /></button>}
@@ -171,7 +171,7 @@ export default function Home() {
             </section>
           </div>
 
-          <footer className="page-footer"><div><span className="footer-dot" /> Prototype boundary</div><span>Records are synthetic · Incoming event is simulated · No learner ranking, hiring decision, or certification</span><a href="#next-case">Next validation case <ArrowRight size={14} /></a></footer>
+          <footer className="page-footer"><div><span className="footer-dot" /> Exercise prototype</div><span>AUDA-NEPAD assignment context · Records are synthetic · Partner event is simulated · No endorsement implied</span><a href="#next-case">Next validation case <ArrowRight size={14} /></a></footer>
         </div>
       </main>
     </div>

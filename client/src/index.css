@@ -5,14 +5,14 @@
   --ink: #19201d;
   --muted-ink: #6c746e;
   --line: #e3e8df;
-  --paper: #f8faf6;
+  --paper: #f7f5ed;
   --white: #ffffff;
-  --forest: #174d3a;
-  --forest-dark: #103c2d;
-  --lime: #c7ed54;
-  --lime-soft: #eef9c8;
-  --amber: #dd8d39;
-  --amber-soft: #fff1dc;
+  --forest: #126b52;
+  --forest-dark: #0b4a39;
+  --lime: #e6b83f;
+  --lime-soft: #fff4cf;
+  --amber: #c8812c;
+  --amber-soft: #fff0d2;
   --red: #c75e56;
   --red-soft: #fce9e6;
   --radius: 13px;
@@ -29,7 +29,7 @@ button { cursor: pointer; }
 .brand-lockup { display: flex; align-items: center; gap: 11px; padding: 0 10px 42px; }
 .brand-lockup strong { display: block; font-family: "Space Grotesk", sans-serif; font-size: 19px; letter-spacing: -0.04em; line-height: 1; }
 .brand-lockup small { display: block; color: #9fc0ae; font-size: 9px; text-transform: uppercase; letter-spacing: .12em; margin-top: 6px; white-space: nowrap; }
-.brand-mark { width: 28px; height: 28px; border: 1.5px solid var(--lime); border-radius: 9px 3px 9px 3px; position: relative; transform: rotate(-10deg); }
+.brand-mark { width: 28px; height: 28px; border: 1.5px solid var(--lime); border-radius: 50%; position: relative; transform: rotate(-10deg); }
 .brand-mark span { display: block; width: 8px; height: 8px; border-radius: 50%; background: var(--lime); position: absolute; left: 8px; top: 8px; }
 .sidebar-section-label { color: #8fb5a3; text-transform: uppercase; font-family: "DM Mono", monospace; letter-spacing: .12em; font-size: 10px; padding: 0 12px 12px; }
 .side-nav { display: flex; flex-direction: column; gap: 4px; }
